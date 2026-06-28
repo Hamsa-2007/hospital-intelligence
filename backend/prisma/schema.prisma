@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("PATIENT")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  handoversGiven Handover[] @relation("DoctorHandovers")
+  patients       Patient[]  @relation("DoctorPatients")
+}
+
+model Patient {
+  id          String   @id @default(uuid())
+  userId      String?  @unique // If patient has an account
+  name        String
+  age         Int
+  gender      String
+  mrn         String   @unique // Medical Record Number
+  status      String   @default("ADMITTED") // ADMITTED, DISCHARGED, etc.
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  doctorId    String?
+  doctor      User?     @relation("DoctorPatients", fields: [doctorId], references: [id])
+  
+  handovers   Handover[]
+  consents    ConsentForm[]
+  records     MedicalRecord[]
+  appointments Appointment[]
+}
+
+model Handover {
+  id                String   @id @default(uuid())
+  patientId         String
+  patient           Patient  @relation(fields: [patientId], references: [id])
+  doctorId          String
+  doctor            User     @relation("DoctorHandovers", fields: [doctorId], references: [id])
+  
+  clinicalNotes     String
+  pendingTasks      String?
+  medicationsDue    String?
+  priorityScore     Int?
+  aiSummary         String?
+  
+  createdAt         DateTime @default(now())
+}
+
+model Incident {
+  id                String   @id @default(uuid())
+  description       String
+  category          String?  // Wrong medicine, wrong patient, etc.
+  department        String?
+  aiRootCauseTags   String?  // JSON stringified array of tags
+  status            String   @default("OPEN")
+  createdAt         DateTime @default(now())
+}
+
+model ConsentForm {
+  id                String   @id @default(uuid())
+  patientId         String
+  patient           Patient  @relation(fields: [patientId], references: [id])
+  procedureName     String
+  originalText      String
+  simplifiedText    String?
+  status            String   @default("PENDING") // PENDING, SIGNED
+  createdAt         DateTime @default(now())
+}
+
+model MedicalRecord {
+  id                String   @id @default(uuid())
+  patientId         String
+  patient           Patient  @relation(fields: [patientId], references: [id])
+  type              String   // LAB, IMAGING, NOTE
+  title             String
+  description       String
+  date              DateTime @default(now())
+}
+
+model Appointment {
+  id                String   @id @default(uuid())
+  patientId         String
+  patient           Patient  @relation(fields: [patientId], references: [id])
+  doctorId          String?
+  doctorName        String
+  department        String
+  date              DateTime
+  status            String   @default("UPCOMING") // UPCOMING, COMPLETED, CANCELLED
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Activity, Shield, Stethoscope, ArrowLeft } from 'lucide-react'
+import { Activity, Shield, ArrowLeft } from 'lucide-react'
 
 export default function StaffLogin() {
   const [email, setEmail] = useState('')

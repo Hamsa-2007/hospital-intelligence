@@ -226,7 +226,7 @@ export default function AdminDashboard() {
                       contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
                     />
                     <Bar dataKey="count" radius={[6, 6, 0, 0]} maxBarSize={60}>
-                      {chartData.map((entry, index) => (
+                      {chartData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Bar>

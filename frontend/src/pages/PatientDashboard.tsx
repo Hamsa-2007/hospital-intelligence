@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import DashboardLayout from '../components/DashboardLayout'
 import { FileText, Wand2, ArrowRight, ShieldCheck, Check, Calendar, Activity, Clock, Stethoscope, Microscope, Search } from 'lucide-react'
 
 export default function PatientDashboard() {
   const location = useLocation()
-  const navigate = useNavigate()
   
   // Determine active tab from URL, defaulting to 'consents'
   const currentPath = location.pathname.split('/').pop()

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import DashboardLayout from '../components/DashboardLayout'
 import { Sparkles, Wand2, FileText, CheckCircle, Clock, Activity, Users, Calendar, Stethoscope, UserCircle2 } from 'lucide-react'
 

@@ -47,6 +47,12 @@ export default function StaffLogin() {
   }
 
 
+  const quickLogin = (roleEmail: string) => {
+    setEmail(roleEmail)
+    setPassword('password123')
+    setTimeout(() => handleLogin(), 100)
+  }
+
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-indigo-900 via-gray-100 to-indigo-900 p-4 relative">
       
@@ -107,6 +113,23 @@ export default function StaffLogin() {
             </button>
           </form>
 
+          <div className="mt-8 pt-8 border-t border-gray-100">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Quick Login</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button 
+                onClick={() => quickLogin('doctor@hospital.com')}
+                className="flex flex-col items-center justify-center p-3 bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-200 rounded-xl transition-all hover:-translate-y-1 group"
+              >
+                <span className="text-sm font-bold text-gray-600 group-hover:text-indigo-700">Doctor</span>
+              </button>
+              <button 
+                onClick={() => quickLogin('admin@hospital.com')}
+                className="flex flex-col items-center justify-center p-3 bg-gray-50 hover:bg-rose-50 border border-gray-200 hover:border-rose-200 rounded-xl transition-all hover:-translate-y-1 group"
+              >
+                <span className="text-sm font-bold text-gray-600 group-hover:text-rose-700">Admin</span>
+              </button>
+            </div>
+          </div>
 
         </div>
       </div>

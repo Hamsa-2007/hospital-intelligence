@@ -42,8 +42,8 @@ export default function PatientLogin() {
     }
   }
 
-  const quickLogin = () => {
-    setEmail('patient@hospital.com')
+  const quickLogin = (roleEmail: string) => {
+    setEmail(roleEmail)
     setPassword('password123')
     setTimeout(() => handleLogin(), 100)
   }
@@ -64,7 +64,7 @@ export default function PatientLogin() {
               <User className="w-8 h-8" />
             </div>
             <h1 className="text-4xl font-bold mb-4 leading-tight">Patient Portal</h1>
-            <p className="text-teal-100 text-lg">Manage your care, understand your consents, and view your records.</p>
+            <p className="text-teal-100 text-lg">Your health records, appointments, and care team, securely at your fingertips.</p>
           </div>
           <div className="text-sm text-teal-200 flex items-center gap-2">
             <Activity className="w-4 h-4" /> AI Hospital Intelligence
@@ -74,17 +74,17 @@ export default function PatientLogin() {
         {/* Right Side - Login Form */}
         <div className="p-8 md:p-12 flex flex-col justify-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-          <p className="text-gray-500 mb-8">Sign in to access your personal health portal.</p>
+          <p className="text-gray-500 mb-8">Sign in to manage your healthcare journey.</p>
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Patient Email or ID</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
               <input 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none" 
-                placeholder="john.doe@email.com"
+                placeholder="patient@hospital.com"
                 required 
               />
             </div>
@@ -109,15 +109,22 @@ export default function PatientLogin() {
           </form>
 
           <div className="mt-8 pt-8 border-t border-gray-100">
-            <button 
-              onClick={quickLogin}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-gray-50 hover:bg-teal-50 text-gray-600 hover:text-teal-700 border border-gray-200 hover:border-teal-200 font-medium rounded-xl transition-all"
-            >
-              <User className="w-5 h-5" />
-              Quick Login as Demo Patient
-            </button>
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Quick Login</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button 
+                onClick={() => quickLogin('patient@hospital.com')}
+                className="flex flex-col items-center justify-center p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl transition-all hover:-translate-y-1 group"
+              >
+                <span className="text-sm font-bold text-gray-600 group-hover:text-teal-700">Patient 1</span>
+              </button>
+              <button 
+                onClick={() => quickLogin('jane.smith@hospital.com')}
+                className="flex flex-col items-center justify-center p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 hover:border-teal-200 rounded-xl transition-all hover:-translate-y-1 group"
+              >
+                <span className="text-sm font-bold text-gray-600 group-hover:text-teal-700">Patient 2</span>
+              </button>
+            </div>
           </div>
-
         </div>
       </div>
     </div>

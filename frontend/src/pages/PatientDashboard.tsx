@@ -28,10 +28,10 @@ export default function PatientDashboard() {
       setLoadingData(true)
       try {
         const [recordsRes, apptsRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/patients/${user.id}/records`, {
+          fetch(`https://hospital-intelligence.onrender.com/api/patients/${user.id}/records`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch(`http://localhost:5000/api/patients/${user.id}/appointments`, {
+          fetch(`https://hospital-intelligence.onrender.com/api/patients/${user.id}/appointments`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ])
@@ -61,7 +61,7 @@ export default function PatientDashboard() {
     setLoading(true)
     setConsented(false)
     try {
-      const res = await fetch('http://localhost:5000/api/ai/consents/simplify', {
+      const res = await fetch('https://hospital-intelligence.onrender.com/api/ai/consents/simplify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ consentText })

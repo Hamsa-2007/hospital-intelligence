@@ -24,10 +24,10 @@ export default function DoctorDashboard() {
       setLoadingData(true)
       try {
         const [patientsRes, scheduleRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/doctors/${user.id}/patients`, {
+          fetch(`https://hospital-intelligence.onrender.com/api/doctors/${user.id}/patients`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch(`http://localhost:5000/api/doctors/${user.id}/schedule`, {
+          fetch(`https://hospital-intelligence.onrender.com/api/doctors/${user.id}/schedule`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ])
@@ -56,7 +56,7 @@ export default function DoctorDashboard() {
     if (!notes) return
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:5000/api/ai/handovers', {
+      const res = await fetch('https://hospital-intelligence.onrender.com/api/ai/handovers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ notes })

@@ -33,7 +33,7 @@ export default function AdminDashboard() {
       const fetchStaff = async () => {
         setLoadingStaff(true)
         try {
-          const res = await fetch('http://localhost:5000/api/admin/staff', {
+          const res = await fetch('https://hospital-intelligence.onrender.com/api/admin/staff', {
             headers: { Authorization: `Bearer ${token}` }
           })
           if (res.ok) {
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
     if (!description) return
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:5000/api/ai/incidents', {
+      const res = await fetch('https://hospital-intelligence.onrender.com/api/ai/incidents', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ description })
